@@ -1,6 +1,4 @@
-package pure_thermal;
-
-import pure_thermal.Air;
+package thermalproject.pure_thermal;
 
 public class ThermalCPU {
 
@@ -9,29 +7,35 @@ public class ThermalCPU {
 //current figures computed in Kelvin, but printed in Celsius
 //if unit time is 10 seconds, need to work with double, as very small increments in temperature in
 //this timeframe
-    double intensity;
-//intensity should be between 5-100
+    int intensity;
 //may not be “intensity", but some input to determine activity, and therefore heat production
 //may need to change to float if intensity very variable. PLACEHOLDER: data type
-    boolean isAlive;
-//not yet used. this is probably not changed by us, but by the power team.
     String rack;
-//rack should be an enum PLACEHOLDER: data type
     public int pos;
     public String name;
     double default_temp = 293.15;
-    int default_intensity = 25;
-//actual default intensity should be about 5, to reflect activity just by being on PLACEHOLDER: specifics
-    double coolingPlan1 = 293.15;
-    double coolingPlan2 = 283.15;
-    double coolingPlan3 = 278.15;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public void setRack(String rack) {
+        this.rack = rack;
+    }
+    int default_intensity = 0;
+    double coolingPlan1 = 287.15;
+    double coolingPlan2 = 285.15;
+    double coolingPlan3 = 283.15;
 
     public ThermalCPU() {
         pos = 0;
         rack = "z";
         currentTemp = default_temp;
         name = "z" + "0";
-        isAlive = true;
         intensity = default_intensity;
 
     }
@@ -40,15 +44,13 @@ public class ThermalCPU {
         pos = p;
         rack = r;
         currentTemp = default_temp;
-        isAlive = true;
         intensity = default_intensity;
         name = r + Integer.toString(p);
     }
 
-    public ThermalCPU(int p, String r, double t, int i, boolean b) {
+    public ThermalCPU(int p, String r, double t, int i) {
         currentTemp = t;
         intensity = i;
-        isAlive = b;
         pos = p;
         rack = r;
         name = r + Integer.toString(p);
@@ -60,7 +62,7 @@ public class ThermalCPU {
 
     public String getRack(){
         return rack;
-        
+
     }
 
     public String getName() {
@@ -75,15 +77,11 @@ public class ThermalCPU {
         currentTemp = i;
     }
 
-    public double getIntensity() {
+    public int getIntensity() {
         return intensity;
     }
 
-    public boolean getIsAlive() {
-        return isAlive;
-    }
-
-    public void setIntensity(double i) {
+    public void setIntensity(int i) {
         intensity = i;
     }
 
@@ -98,7 +96,6 @@ public class ThermalCPU {
     public void generateHeat() {
         double generated = (double) intensity / 363;
         currentTemp += generated;
-//PLACEHOLDER: intensity is assumed to be 1:1 watts. Definately not going to be the case.
 //generate heat should not be based on currentTemp but only intensity.
 //Delta Q(intensity/energy)=m(mass)*c(specific heat capacity)*delta T(change in temp)
 //ASSUMPTIONS: ThermalCPU weighs 3Kg, it is composed of 50/50 silicon and plastic. specific heat capacity is 1.12 kJ/Kg*K.
@@ -111,7 +108,7 @@ public class ThermalCPU {
 //intensity(J)(K)/363(J)=T(K).
     }
 
-    public void radiate(ThermalCPU other, Air air) //may need no input method for top CPUs in racks. not sure. PLACEHOLDER: stub
+    public void radiate(ThermalCPU other, Air air)
     {
         double diff = this.heatDiff(other);
         double thisTemp = this.getTemp();
@@ -120,18 +117,16 @@ public class ThermalCPU {
 
         if (diff < 0) {
 //transfer some small amount of heat "down" to lower (this) ThermalCPU
-//PLACEHOLDER: maths
             double trans = diff / 50;
             this.setTemp(thisTemp - trans);
             other.setTemp(otherTemp + trans / 1.2);
             air.setTemp(airTemp + trans / 240);
         } else if (diff > 0) {
 //transfer proportionally more heat "up" from this ThermalCPU to other ThermalCPU
-//PLACEHOLDER: maths
             double trans = diff / 20;
             this.setTemp(thisTemp - trans);
 //this ThermalCPU loses more heat to surronding area than transferred up, meaning some
-//heat is lost to surronding area, otherCPU recieves less than full amount of heat. PLACEHOLDER: maths
+//heat is lost to surronding area, otherCPU recieves less than full amount of heat.
             other.setTemp(otherTemp + (trans / 1.2));
             air.setTemp(airTemp + trans / 6);
         } else {
@@ -155,20 +150,29 @@ public class ThermalCPU {
 //do nothing for now. may want to slightly heat CPUs, but this call is quite unlikely
         } else if (diff > 0) {
             currentTemp -= (diff / 200);
-//PLACEHOLDER: maths
+//lose small amount of heat
         }
     }
 
     public void run(int cooling, ThermalCPU other, Air air) {
-        this.cool(cooling);
-        this.radiate(other, air);
-        this.generateHeat();
+        cool(cooling);
+        radiate(other, air);
+        generateHeat();
 
     }
 
     public void run(int cooling) {
-        this.cool(cooling);
-        this.generateHeat();
+        cool(cooling);
+        generateHeat();
 
+    }
+
+    public void CopyCPU(ThermalCPU other)
+            {
+        this.setTemp(other.getTemp());
+        this.setIntensity(other.getIntensity());
+        this.setName(other.getName());
+        this.setPos(other.getPos());
+        this.setRack(other.getRack());
     }
 }
