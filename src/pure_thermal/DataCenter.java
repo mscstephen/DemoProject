@@ -17,7 +17,7 @@ public class DataCenter {
     double ambientRoomTemp = 299.15;
     double aggregateTemp;
     int[] futureCooling;
-    int[] intensityPlan;
+    double[] intensityPlan;
     String[] racks = {"a", "b", "c", "d"};
     //enum char[] better suited for racks. don't know how.
     ArrayList<ThermalCPU> list;
@@ -27,11 +27,7 @@ public class DataCenter {
         for(int i=0; i<40; i++)
         {
             this.list.get(i).CopyCPU(list.get(i));
-            System.out.println(i);
         }
-        System.out.println("///////////////");
-        System.out.println(this.list.size());
-        System.out.println("///////////////");
     }
 
     public ArrayList<ThermalCPU> getList() {
@@ -90,12 +86,12 @@ public class DataCenter {
         }
     }
 
-    public int[] getIntensityPlan()
+    public double[] getIntensityPlan()
     {
         return intensityPlan;
     }
 
-    public void setIntensityPlan(int[] plan) {
+    public void setIntensityPlan(double[] plan) {
         intensityPlan = plan;
     }
 
