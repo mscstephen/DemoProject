@@ -79,7 +79,7 @@ int i=0;
 //{
     if(i<4)
     {
-runs[i]=data;
+runs[i].getAllAttributes(data);
 s.getSchedule();
 double[][] schedulingInput = new double[4][10];
 schedulingInput=s.getPlant();
@@ -95,20 +95,20 @@ t.Submit(list, air);
 //this should change one of the boolean accepted(i) to true, exiting the while loop
 results[i]=reply;
 if(results[i]==true)
-    data=runs[i];
+    data.getAllAttributes(runs[i]);
     i++;
     }
  else
     {
         //wait for conformation from DB about which run to do.
         if(accepted1==true)
-            data=run1;
+            data.getAllAttributes(run1);
         if(accepted2==true)
-            data=run2;
+            data.getAllAttributes(run2);
         if(accepted3==true)
-            data=run3;
+            data.getAllAttributes(run3);
         if(accepted4==true)
-            data=run4;
+            data.getAllAttributes(run4);
 
  }
         //}
@@ -133,3 +133,4 @@ if(results[i]==true)
 up.ChangeStatus(false);
 }
 }
+
