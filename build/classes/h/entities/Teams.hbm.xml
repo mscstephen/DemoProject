@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-Feb-2012 13:51:13 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="msc2012test" name="h.entities.Teams" table="teams">
+    <id name="teamId" type="java.lang.Integer">
+      <column name="TeamId"/>
+      <generator class="identity"/>
+    </id>
+    <property name="name" type="string">
+      <column length="20" name="Name"/>
+    </property>
+    <property name="active" type="java.lang.Integer">
+      <column name="Active"/>
+    </property>
+    <set inverse="true" name="userses">
+      <key>
+        <column name="TID"/>
+      </key>
+      <one-to-many class="h.entities.Users"/>
+    </set>
+  </class>
+</hibernate-mapping>

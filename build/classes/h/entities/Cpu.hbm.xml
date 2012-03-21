@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-Feb-2012 13:51:13 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="msc2012test" name="h.entities.Cpu" table="cpu">
+    <id name="cpuid" type="java.lang.Integer">
+      <column name="CPUID"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="h.entities.Job" fetch="select" name="job">
+      <column name="JID"/>
+    </many-to-one>
+    <many-to-one class="h.entities.Processingrate" fetch="select" name="processingrate">
+      <column name="ProId"/>
+    </many-to-one>
+    <many-to-one class="h.entities.Health" fetch="select" name="health">
+      <column name="HID"/>
+    </many-to-one>
+    <property name="name" type="string">
+      <column length="20" name="Name"/>
+    </property>
+    <set inverse="true" name="pmap2s">
+      <key>
+        <column name="CPUID"/>
+      </key>
+      <one-to-many class="h.entities.Pmap2"/>
+    </set>
+    <set inverse="true" name="plants">
+      <key>
+        <column name="CPUID"/>
+      </key>
+      <one-to-many class="h.entities.Plant"/>
+    </set>
+    <set inverse="true" name="thermalmaps">
+      <key>
+        <column name="CPUID"/>
+      </key>
+      <one-to-many class="h.entities.Thermalmap"/>
+    </set>
+    <set inverse="true" name="schedules">
+      <key>
+        <column name="CPUID"/>
+      </key>
+      <one-to-many class="h.entities.Schedule"/>
+    </set>
+    <set inverse="true" name="pmap1s">
+      <key>
+        <column name="CPUID"/>
+      </key>
+      <one-to-many class="h.entities.Pmap1"/>
+    </set>
+    <set inverse="true" name="costplans">
+      <key>
+        <column name="CPUID"/>
+      </key>
+      <one-to-many class="h.entities.Costplan"/>
+    </set>
+    <set inverse="true" name="pschedules">
+      <key>
+        <column name="CPUID"/>
+      </key>
+      <one-to-many class="h.entities.Pschedule"/>
+    </set>
+  </class>
+</hibernate-mapping>

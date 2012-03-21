@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-Feb-2012 13:51:13 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="msc2012test" name="h.entities.Costplan" table="costplan">
+    <id name="costId" type="java.lang.Integer">
+      <column name="CostID"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="h.entities.Job" fetch="select" name="job">
+      <column name="JID"/>
+    </many-to-one>
+    <many-to-one class="h.entities.Totalpower" fetch="select" name="totalpower">
+      <column name="TPID"/>
+    </many-to-one>
+    <many-to-one class="h.entities.Cpu" fetch="select" name="cpu">
+      <column name="CPUID"/>
+    </many-to-one>
+    <property name="jobRevenue" type="big_decimal">
+      <column name="JobRevenue" precision="8" scale="3"/>
+    </property>
+    <property name="tpowerCost" type="big_decimal">
+      <column name="TPowerCost" precision="8" scale="3"/>
+    </property>
+    <property name="damageCost" type="big_decimal">
+      <column name="DamageCost" precision="8" scale="3"/>
+    </property>
+    <set inverse="true" name="userses">
+      <key>
+        <column name="CostId"/>
+      </key>
+      <one-to-many class="h.entities.Users"/>
+    </set>
+  </class>
+</hibernate-mapping>

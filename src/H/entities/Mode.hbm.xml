@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-Feb-2012 13:51:13 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="msc2012test" name="h.entities.Mode" table="mode">
+    <id name="modeId" type="java.lang.Integer">
+      <column name="ModeId"/>
+      <generator class="identity"/>
+    </id>
+    <property name="name" type="string">
+      <column length="20" name="Name"/>
+    </property>
+    <property name="timeStarted" type="time">
+      <column length="8" name="TimeStarted" not-null="true"/>
+    </property>
+    <set inverse="true" name="rows">
+      <key>
+        <column name="ModeId"/>
+      </key>
+      <one-to-many class="h.entities.Row"/>
+    </set>
+  </class>
+</hibernate-mapping>

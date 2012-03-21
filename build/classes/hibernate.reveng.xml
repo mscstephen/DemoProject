@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="msc2012test"/>
+  <table-filter match-name="costplan"/>
+  <table-filter match-name="processingrate"/>
+  <table-filter match-name="pschedule"/>
+  <table-filter match-name="job"/>
+  <table-filter match-name="row"/>
+  <table-filter match-name="rules"/>
+  <table-filter match-name="pmap1"/>
+  <table-filter match-name="plant"/>
+  <table-filter match-name="teams"/>
+  <table-filter match-name="users"/>
+  <table-filter match-name="mode"/>
+  <table-filter match-name="schedule"/>
+  <table-filter match-name="cpu"/>
+  <table-filter match-name="totalpower"/>
+  <table-filter match-name="pmap2"/>
+  <table-filter match-name="thermalmap"/>
+  <table-filter match-name="health"/>
+</hibernate-reverse-engineering>

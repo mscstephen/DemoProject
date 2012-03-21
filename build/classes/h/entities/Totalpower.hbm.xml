@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-Feb-2012 13:51:13 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="msc2012test" name="h.entities.Totalpower" table="totalpower">
+    <id name="tpid" type="java.lang.Integer">
+      <column name="TPID"/>
+      <generator class="identity"/>
+    </id>
+    <property name="totalPower" type="big_decimal">
+      <column name="TotalPower" precision="8" scale="3"/>
+    </property>
+    <property name="pue" type="big_decimal">
+      <column name="PUE" precision="8" scale="3"/>
+    </property>
+    <set inverse="true" name="userses">
+      <key>
+        <column name="TPID"/>
+      </key>
+      <one-to-many class="h.entities.Users"/>
+    </set>
+    <set inverse="true" name="costplans">
+      <key>
+        <column name="TPID"/>
+      </key>
+      <one-to-many class="h.entities.Costplan"/>
+    </set>
+  </class>
+</hibernate-mapping>

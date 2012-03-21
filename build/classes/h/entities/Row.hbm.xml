@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-Feb-2012 13:51:13 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="msc2012test" name="h.entities.Row" table="row">
+    <id name="rowId" type="java.lang.Integer">
+      <column name="RowId"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="h.entities.Mode" fetch="select" name="mode">
+      <column name="ModeId"/>
+    </many-to-one>
+    <property name="name" type="string">
+      <column length="20" name="Name"/>
+    </property>
+    <set inverse="true" name="plants">
+      <key>
+        <column name="RowID"/>
+      </key>
+      <one-to-many class="h.entities.Plant"/>
+    </set>
+    <set inverse="true" name="thermalmaps">
+      <key>
+        <column name="RowID"/>
+      </key>
+      <one-to-many class="h.entities.Thermalmap"/>
+    </set>
+    <set inverse="true" name="pmap2s">
+      <key>
+        <column name="RowID"/>
+      </key>
+      <one-to-many class="h.entities.Pmap2"/>
+    </set>
+    <set inverse="true" name="pmap1s">
+      <key>
+        <column name="RowID"/>
+      </key>
+      <one-to-many class="h.entities.Pmap1"/>
+    </set>
+  </class>
+</hibernate-mapping>
