@@ -1,4 +1,4 @@
-package thermalproject.pure_thermal;
+package pure_thermal;
 
 public class ThermalCPU {
 
@@ -7,7 +7,7 @@ public class ThermalCPU {
 //current figures computed in Kelvin, but printed in Celsius
 //if unit time is 10 seconds, need to work with double, as very small increments in temperature in
 //this timeframe
-    int intensity;
+    double intensity;
 //may not be “intensity", but some input to determine activity, and therefore heat production
 //may need to change to float if intensity very variable. PLACEHOLDER: data type
     String rack;
@@ -26,7 +26,7 @@ public class ThermalCPU {
     public void setRack(String rack) {
         this.rack = rack;
     }
-    int default_intensity = 0;
+    double default_intensity = 0;
     double coolingPlan1 = 287.15;
     double coolingPlan2 = 285.15;
     double coolingPlan3 = 283.15;
@@ -77,11 +77,11 @@ public class ThermalCPU {
         currentTemp = i;
     }
 
-    public int getIntensity() {
+    public double getIntensity() {
         return intensity;
     }
 
-    public void setIntensity(int i) {
+    public void setIntensity(double i) {
         intensity = i;
     }
 
